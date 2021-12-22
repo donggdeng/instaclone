@@ -3,6 +3,8 @@
   <span> | </span>
   <%= link_to "Profiles",  profiles_path %>
   <span> | </span>
+  <%= link_to "Friends",  friends_path %>
+  <span> | </span>
 
   <% if user_signed_in? %>
     <%= link_to current_user.username, profile_path(current_user.username) %>
