@@ -4,5 +4,11 @@ class FriendRequest < ApplicationRecord
     
     validates :from_user, presence: true
     validates :to_user, presence: true
+
+    validate :check_users_difference
+
+    def check_users_difference
+        errors.add(:from_user, "Can't request self as friend") if from_user == to_user
+    end
   end
   
