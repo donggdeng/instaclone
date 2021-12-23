@@ -1,0 +1,26 @@
+<h5>Friends</h5>
+<% @friends.each do |friend| %>
+    <div>
+        <%= link_to friend.username, profile_path(friend.username) %>
+    </div>
+<% end %>
+<h5>Pending Request</h5>
+<% @potential_friendships.each do |friendship| %>
+    <div>
+        <span><%= link_to friendship.from_user.username, profile_path(friendship.from_user.username) %></span>
+        <span><%= link_to 'Accept', friendship_path(friendship, status: :accepted), method: :patch %></span> |
+        <span><%= link_to 'Decline', friendship_path(friendship, status: :declined), method: :patch %></span>
+    </div>
+<% end %>
+<% @requested_friendships.each do |friendship| %>
+    <div>
+        <span><%= link_to friendship.to_user.username, profile_path(friendship.to_user.username) %></span>
+        <span>Requested</span>
+    </div>
+<% end %>
+<% @strangers.each do |user| %>
+    <div>
+        <span><%= link_to user.username, profile_path(user.username) %></span>
+        <%= link_to 'Send Friend Request', friendships_path(to_user: user), method: :post %>
+    </div>
+<% end %>

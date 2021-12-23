@@ -12,9 +12,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create, :edit, :update, :destroy]
 
-  resources :friends, only: [:index]
-
-  resources :friend_requests, only: [:index, :create]
+  resources :friendships, only: [:index, :create, :update]
 
   root 'photos#index'
 
