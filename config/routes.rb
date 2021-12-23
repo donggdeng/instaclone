@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :friends, only: [:index]
 
+  resources :friend_requests, only: [:index, :create]
+
   root 'photos#index'
 
   get '*path', to: 'photos#index', constraints: lambda { |req| req.path.exclude? 'rails/active_storage' }

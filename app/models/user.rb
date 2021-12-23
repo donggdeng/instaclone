@@ -10,4 +10,11 @@ class User < ApplicationRecord
 
   has_many :photos, dependent: :delete_all
   has_many :comments, dependent: :delete_all
+
+  has_many :to_friend_requests, foreign_key: "from_user_id", class_name: "FriendRequest"
+  has_many :from_friend_requests, foreign_key: "to_user_id", class_name: "FriendRequest" 
+
+  has_many :requested_friends, through: :to_friend_requests, source: :to_user
+  has_many :potential_friends, through: :from_friend_requests, source: :from_user
+
 end

@@ -1,1 +1,11 @@
-This is the friends page.
+<% @users.each do |user| %>
+    <div>
+        <span><%= user.username %></span>
+        <% if current_user.requested_friends.include? user%>
+            <span>Requested.</span>
+        <% else %>
+            <%= link_to 'Send Friend Request', friend_requests_path(user.id), method: :post %>
+        <% end %>        
+    </div>
+<% end %>
+
