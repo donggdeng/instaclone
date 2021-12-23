@@ -4,7 +4,8 @@ class FriendRequestsController < ApplicationController
     end
 
     def create
-        @friend_request = current_user.to_friend_requests.build to_user_id: friend_request_params['format']
+        @friend_request = current_user.to_friendships.build to_user_id: friendship_params['format'],
+                                                            status: :requested
 
         @friend_request.save
 
@@ -14,7 +15,7 @@ class FriendRequestsController < ApplicationController
 
     private
 
-    def friend_request_params
+    def friendship_params
         params.permit(:format)
     end
     

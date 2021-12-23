@@ -1,4 +1,7 @@
-class FriendRequest < ApplicationRecord
+class Friendship < ApplicationRecord
+
+    enum status: [:requested, :accepted]
+
     belongs_to :from_user, class_name: "User"
     belongs_to :to_user, class_name: "User"
     
@@ -7,8 +10,10 @@ class FriendRequest < ApplicationRecord
 
     validate :check_users_difference
 
+    scope :requested, -> { where(status: :requested) }
+
     def check_users_difference
         errors.add(:from_user, "Can't request self as friend") if from_user == to_user
     end
-  end
+end
   
